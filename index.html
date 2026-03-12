@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResponsiveLab — Device Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./files/style.css"/>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon"></div>
+    <span class="logo-text">Responsive<span>Lab</span></span>
+  </div>
+
+  <div class="url-bar">
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="url-input" type="url" placeholder="testing/index.html" value="testing/index.html" spellcheck="false" />
+  </div>
+
+  <button class="btn-load" onclick="loadURL()">▶ Cargar</button>
+</header>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <span class="toolbar-label">Dispositivo</span>
+
+  <!-- Phones -->
+  <button class="device-btn" onclick="setDevice(375,667,'phone','iPhone SE')" title="375×667">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+    SE
+  </button>
+  <button class="device-btn active" onclick="setDevice(390,844,'phone','iPhone 14')" title="390×844">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+    iPhone 14
+  </button>
+  <button class="device-btn" onclick="setDevice(414,896,'phone','iPhone Plus')" title="414×896">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+    Plus
+  </button>
+  <button class="device-btn" onclick="setDevice(360,800,'phone','Android')" title="360×800">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 2h8M9 22h6"/></svg>
+    Android
+  </button>
+
+  <div class="toolbar-sep"></div>
+
+  <!-- Tablets -->
+  <button class="device-btn" onclick="setDevice(768,1024,'tablet','iPad')" title="768×1024">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+    iPad
+  </button>
+  <button class="device-btn" onclick="setDevice(820,1180,'tablet','iPad Air')" title="820×1180">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+    Air
+  </button>
+  <button class="device-btn" onclick="setDevice(1024,1366,'tablet','iPad Pro')" title="1024×1366">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+    Pro
+  </button>
+
+  <div class="toolbar-sep"></div>
+
+  <!-- Desktop -->
+  <button class="device-btn" onclick="setDevice(1280,800,'desktop','Laptop')" title="1280×800">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
+    Laptop
+  </button>
+  <button class="device-btn" onclick="setDevice(1440,900,'desktop','HD')" title="1440×900">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
+    HD
+  </button>
+
+  <div class="toolbar-sep"></div>
+
+  <!-- Custom -->
+  <div class="custom-size">
+    <input class="size-input" id="custom-w" type="number" value="390" min="200" max="2560" />
+    <span class="size-x">×</span>
+    <input class="size-input" id="custom-h" type="number" value="844" min="200" max="2560" />
+    <button class="device-btn" onclick="applyCustom()" style="margin-left:4px">Aplicar</button>
+  </div>
+
+  <div class="toolbar-sep"></div>
+
+  <!-- Rotate -->
+  <button class="icon-btn" onclick="toggleRotate()" title="Rotar">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+      <path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+    </svg>
+  </button>
+
+  <!-- Zoom -->
+  <button class="icon-btn" onclick="adjustZoom(-0.1)" title="Zoom out">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </button>
+  <span class="size-display" id="zoom-label">100%</span>
+  <button class="icon-btn" onclick="adjustZoom(0.1)" title="Zoom in">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </button>
+
+  <div class="toolbar-sep"></div>
+  <span class="size-display" id="size-label">390 × 844</span>
+</div>
+
+<!-- MAIN -->
+<main>
+  <div id="zoom-wrap" class="zoom-wrap">
+    <div id="device-shell" class="device-shell shell-phone">
+      <div class="frame-wrapper" id="frame-wrapper">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-state-icon">📱</div>
+          <p>Presiona <strong>Cargar</strong> para previsualizar<br><code style="font-size:11px;background:#eee;padding:2px 6px;border-radius:4px">testing/index.html</code></p>
+        </div>
+        <iframe id="preview-frame" scrolling="yes"></iframe>
+      </div>
+    </div>
+
+    <!-- Info strip -->
+    <div class="info-strip" id="info-strip">
+      <div class="info-chip"><span class="dot"></span><span id="device-label">iPhone 14</span></div>
+      <div class="info-chip"><span id="res-label">390 × 844 px</span></div>
+    </div>
+  </div>
+</main>
+
+<div class="scroll-hint" id="scroll-hint">
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  Scroll disponible en el iframe
+</div>
+
+<script src="./files/javascript.js"></script>
+</body>
+</html>
